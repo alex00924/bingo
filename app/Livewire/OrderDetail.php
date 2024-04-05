@@ -3,7 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\models\Orders;
+use App\Models\Orders;
 
 class OrderDetail extends Component
 {
@@ -11,7 +11,7 @@ class OrderDetail extends Component
     public function mount($id) {
         $this->order = Orders::with('orderDetails')->findOrFail($id);
     }
-    
+
     public function render()
     {
         return view('livewire.order-detail');
