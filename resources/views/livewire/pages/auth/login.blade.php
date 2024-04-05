@@ -5,22 +5,32 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
+use App\Models\User;
 
 new #[Layout('layouts.guest')] class extends Component
 {
-    public LoginForm $form;
+    public string $phone;
 
     /**
      * Handle an incoming authentication request.
      */
     public function login(): void
     {
-        $this->form->password = "123456789";
-        $this->validate();
+        $user = User::where('phone', $this->phone)->first();
+        if (empty($user)) {
+            $user = User::create([
+                'phone' => $this->phone,
+                'email' => $this->phone,
+                'password' => Hash::make('123456789')
+            ]);
 
-        $this->form->authenticate();
+            event(new Registered($user));
+        }
 
-        Session::regenerate();
+        Auth::login($user);
 
         $this->redirectIntended(default: RouteServiceProvider::HOME, navigate: true);
     }
@@ -33,9 +43,9 @@ new #[Layout('layouts.guest')] class extends Component
     <form wire:submit="login">
         <!-- Email Address -->
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="form.email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('form.email')" class="mt-2" />
+            <x-input-label for="phone" :value="__('TELEFONE')" />
+            <x-text-input wire:model="phone" id="phone" class="block mt-1 w-full" name="phone" required autofocus autocomplete="phone" />
+            <x-input-error :messages="$errors->get('form.phone')" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-end mt-4">

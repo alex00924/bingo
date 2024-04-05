@@ -41,7 +41,6 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 // Route::view('profile', 'profile')
 //     ->middleware(['auth'])
 //     ->name('profile');
-Route::get('order/new', NewOrder::class)->name('order.new');
 
 Route::middleware([
     'auth',
@@ -49,6 +48,7 @@ Route::middleware([
     Route::view('profile', 'profile')->name('profile');
     Route::get('order/list', OrderList::class)->name('order.list');
     Route::get('order/details/{id}', OrderDetail::class)->name('order.detail');
+    Route::get('order/new', NewOrder::class)->name('order.new');
 });
 
 Route::middleware([

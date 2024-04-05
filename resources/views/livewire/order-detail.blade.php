@@ -39,7 +39,7 @@
                         </h5>
                         <img src="data:image/jpeg;base64,{{$order->qr_code_base64}}" class="w-64 h-64 mx-auto mt-2"/>
 
-                        <h6 class="text-xl text-gray-900 text-center mt-4">
+                        <h6 class="text-xl text-gray-900 dark:text-white text-center mt-4">
                             Ou se preferir copie o código abaixo para realizar o pagamento:
                         </h6>
                         <div class="flex justify-center mt-2">
@@ -57,7 +57,7 @@
                                 &nbsp; COPIAR CÓDIGO
                             </button>
                         </div>
-                        <p class="border border-gray-300 mt-2 p-2 break-all">
+                        <p class="border border-gray-300 mt-2 p-2 break-all text-gray-900 dark:text-white">
                             {{$order->qr_code}}
                         </p>
                     </div>
@@ -71,38 +71,44 @@
 
         <div class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
             @foreach ($order->orderDetails as $orderDetail)
-                <table class="w-full text-xl text-center text-gray-900 dark:text-gray-400">
-                    <thead class="text-3xl font-bold uppercase bg-gray-500 text-white">
-                        <tr>
-                            <th scope="col" class="p-2 border-l border-l-gray-500 border-r border-r-gray-300">
-                                B
-                            </th>
-                            <th scope="col" class="p-2 border-r border-gray-300">
-                                I
-                            </th>
-                            <th scope="col" class="p-2 border-r border-gray-300">
-                                N
-                            </th>
-                            <th scope="col" class="p-2 border-r border-gray-300">
-                                G
-                            </th>
-                            <th scope="col" class="p-2 border-r border-gray-500">
-                                O
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @for($row=0; $row < 5; $row+=1)
-                            <tr class="bg-white">
-                                @for($column=0; $column < 5; $column+=1)
-                                    <td class="p-2 border border-gray-500">
-                                        {{$orderDetail->bingoCard['d' . ($row * 5 + $column + 1)]}}
-                                    </td>
+                <div class="w-full border border-yellow_border">
+                    <img src="/imgs/card.jpeg" class="w-full" />
+                    <div class="bg-white p-4">
+                        <p class="pl-8 my-4 text-gray-900 dark:text-gray-200">Nº <span class="underline">{{$orderDetail->bingoCard['card_number']}}-{{$orderDetail->bingoCard['card_digit']}}</p>
+                        <table class="w-full text-xl text-center text-gray-900 dark:text-gray-200">
+                            <thead class="text-3xl font-bold uppercase bg-gray-500 text-white">
+                                <tr>
+                                    <th scope="col" class="p-2 border-l border-l-gray-500 border-r border-r-gray-300">
+                                        B
+                                    </th>
+                                    <th scope="col" class="p-2 border-r border-gray-300">
+                                        I
+                                    </th>
+                                    <th scope="col" class="p-2 border-r border-gray-300">
+                                        N
+                                    </th>
+                                    <th scope="col" class="p-2 border-r border-gray-300">
+                                        G
+                                    </th>
+                                    <th scope="col" class="p-2 border-r border-gray-500">
+                                        O
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for($row=0; $row < 5; $row+=1)
+                                    <tr class="bg-white">
+                                        @for($column=0; $column < 5; $column+=1)
+                                            <td class="p-2 border border-gray-500">
+                                                {{$orderDetail->bingoCard['d' . ($row * 5 + $column + 1)]}}
+                                            </td>
+                                        @endfor
+                                    </tr>
                                 @endfor
-                            </tr>
-                        @endfor
-                    </tbody>
-                </table>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             @endforeach
         </div>
     </div>

@@ -17,6 +17,10 @@ return new class extends Migration
             $table->integer('quantity')->default(1);
             $table->string('price');
             $table->integer('payment_status')->default(0); // 0: pending, 1: success, 2: fail
+            $table->string('payment_id');
+            $table->string('qr_code');
+            $table->text('qr_code_base64');
+            $table->string('ticket_url');
             $table->timestamps();
         });
     }

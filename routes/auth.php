@@ -23,7 +23,7 @@ Route::middleware('guest')->prefix("admin")->group(function () {
     //     ->name('register');
 
     Volt::route('login', 'pages.auth.admin_login')
-        ->name('login');
+        ->name('admin.login');
 
     // Volt::route('forgot-password', 'pages.auth.forgot-password')
     //     ->name('password.request');

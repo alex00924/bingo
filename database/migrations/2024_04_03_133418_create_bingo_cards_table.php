@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('bingo_cards', function (Blueprint $table) {
             $table->id();
+            $table->string('card_number');
+            $table->string('card_digit');
             $table->integer("d1");
             $table->integer("d2");
             $table->integer("d3");

@@ -41,8 +41,8 @@ class NewOrder extends Component
 
     public function mount() {
         if (auth()->check()) {
-            $this->name = auth()->user()->name;
-            $this->city = auth()->user()->city;
+            $this->name = auth()->user()->name??'';
+            $this->city = auth()->user()->city??'';
             $this->phone = auth()->user()->phone;
         }
     }
@@ -52,24 +52,13 @@ class NewOrder extends Component
             $this->validate();
 
 
-            $user = User::where('phone', $this->phone)->first();
-            if (empty($user)) {
-                $user = User::create([
-                    'name' => $this->name,
-                    'phone' => $this->phone,
-                    'email' => $this->phone,
-                    'password' => Hash::make('123456789'),
-                    'city' => $this->city
-                ]);
-
-                event(new Registered($user));
-            }
-
+            $user = Auth::user();
+            
             $user->name = $this->name;
             $user->city = $this->city;
+            $user->email = $this->phone;
+            $user->phone = $this->phone;
             $user->save();
-
-            Auth::login($user);
         }
         $this->processStatus += 1;
         if ($this->processStatus == 3) {
@@ -201,8 +190,12 @@ class NewOrder extends Component
             'ticket_url' => $this->ticket_url
         ]);
 
-        // Fetch random rows from BingoCard
-        $bingoCards = BingoCards::inRandomOrder()->limit($this->quantity)->get();
+        // Fetch next n rows from BingoCard after last ordered number
+        $lastOrder = OrderDetails::last();
+
+        $bingoCards = BingoCards::where('id', '>', $lastOrder->bingo_card_id)
+            ->limit($this->quantity)->get();
+            
         foreach($bingoCards as $bingoCard) {
             OrderDetails::create([
                 'order_id' => $order->id,

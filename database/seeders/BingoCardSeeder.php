@@ -29,6 +29,8 @@ class BingoCardSeeder extends Seeder
             for($i = 1; $i < 26; $i++) {
                 $data["d$i"] = $bingoCard["D$i"];
             }
+            $data['card_number'] = $bingoCard['CartelaD'];
+            $data['card_digit'] = $bingoCard['DigitoD'];
             $bingoCardData[] = $data;
         }
 
