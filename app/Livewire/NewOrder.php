@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use App\Models\User;
-use App\models\Orders;
+use App\Models\Orders;
 use App\Models\OrderDetails;
 use App\Models\BingoCards;
 
