@@ -77,7 +77,7 @@ class NewOrder extends Component
         }
     }
 
-    private function createPaymentRequest() {
+    private function createPaymentRequest_New() {
         // Step 2: Set production or sandbox access token
         MercadoPagoConfig::setAccessToken(env('PIX_ACCESS_TOKEN'));
         // Step 2.1 (optional - default is SERVER): Set your runtime enviroment from MercadoPagoConfig::RUNTIME_ENVIROMENTS
@@ -131,6 +131,52 @@ class NewOrder extends Component
         // Step 7: Handle exceptions
         } catch (MPApiException $e) {
             $this->notify(json_encode($e->getApiResponse()->getContent()), "Error", "error");
+        } catch (\Exception $e) {
+            $this->notify($e->getMessage(), "Error", "error");
+        }
+    }
+
+    private function createPaymentRequest() {
+        // Step 2: Set production or sandbox access token
+        \MercadoPago\SDK::setAccessToken(env('PIX_ACCESS_TOKEN'));
+        // MercadoPagoConfig::setAccessToken(env('PIX_ACCESS_TOKEN'));
+        // Step 2.1 (optional - default is SERVER): Set your runtime enviroment from MercadoPagoConfig::RUNTIME_ENVIROMENTS
+        // In case you want to test in your local machine first, set runtime enviroment to LOCAL
+        // \MercadoPago\SDK::setRuntimeEnviroment(env('PIX_RUN_TIME'));
+
+        // Step 3: Initialize the API client
+        $payment = new \MercadoPago\Payment();//new PaymentClient();
+
+        try {
+            $name_parts = explode(" ", $this->name);
+            $lastname = array_pop($name_parts);
+            $firstname = implode(" ", $name_parts);
+            
+            $expireDate = date("Y-m-d\TH:i:s.000P", strtotime("+30 minutes"));
+            $payment->transaction_amount = $this->quantity * 10;
+            $payment->description = "Pagamento de Prêmios D'BILHAR";
+            $payment->payment_method_id = "pix";
+            $payment->date_of_expiration = $expireDate;
+            $payment->payer = [
+                "email" => "contato@chapadahost.com.br",
+                "first_name" => $firstname,
+                "last_name" => $lastname,
+                "phone" => [
+                    "area_code" => 11,
+                    "number" => $this->phone
+                ],
+                "address" => [
+                    "city" => $this->city
+                ]
+            ];
+
+            $payment->save();
+
+            $this->payment_request_id = $payment->id;
+            $this->qr_code_base64 = $payment->point_of_interaction->transaction_data->qr_code_base64;
+            $this->qr_code = $payment->point_of_interaction->transaction_data->qr_code;
+            $this->ticket_url = $payment->point_of_interaction->transaction_data->ticket_url;
+        // Step 7: Handle exceptions
         } catch (\Exception $e) {
             $this->notify($e->getMessage(), "Error", "error");
         }
