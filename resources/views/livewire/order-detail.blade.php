@@ -74,23 +74,23 @@
                 <div class="w-full border border-yellow_border">
                     <img src="/imgs/card.jpeg" class="w-full" />
                     <div class="bg-white p-4">
-                        <p class="pl-8 my-4 text-gray-900 dark:text-gray-200">Nº <span class="underline">{{$orderDetail->bingoCard['card_number']}}-{{$orderDetail->bingoCard['card_digit']}}</p>
+                        <p class="pl-4 md:pl-8 my-2 md:my-4 text-xl font-bold text-gray-900 dark:text-gray-200">Nº <span class="underline">{{$orderDetail->bingoCard['card_number']}}-{{$orderDetail->bingoCard['card_digit']}}</p>
                         <table class="w-full text-xl text-center text-gray-900 dark:text-gray-200">
-                            <thead class="text-3xl font-bold uppercase bg-gray-500 text-white">
+                            <thead class="text-xl md:text-3xl font-bold uppercase bg-gray-500 text-white">
                                 <tr>
-                                    <th scope="col" class="p-2 border-l border-l-gray-500 border-r border-r-gray-300">
+                                    <th scope="col" class="md:p-2 border-l border-l-gray-500 border-r border-r-gray-300">
                                         B
                                     </th>
-                                    <th scope="col" class="p-2 border-r border-gray-300">
+                                    <th scope="col" class="md:p-2 border-r border-gray-300">
                                         I
                                     </th>
-                                    <th scope="col" class="p-2 border-r border-gray-300">
+                                    <th scope="col" class="md:p-2 border-r border-gray-300">
                                         N
                                     </th>
-                                    <th scope="col" class="p-2 border-r border-gray-300">
+                                    <th scope="col" class="md:p-2 border-r border-gray-300">
                                         G
                                     </th>
-                                    <th scope="col" class="p-2 border-r border-gray-500">
+                                    <th scope="col" class="md:p-2 border-r border-gray-500">
                                         O
                                     </th>
                                 </tr>
@@ -99,7 +99,7 @@
                                 @for($row=0; $row < 5; $row+=1)
                                     <tr class="bg-white">
                                         @for($column=0; $column < 5; $column+=1)
-                                            <td class="p-2 border border-gray-500">
+                                            <td class="md:p-2 border border-gray-500">
                                                 {{$orderDetail->bingoCard['d' . ($row * 5 + $column + 1)]}}
                                             </td>
                                         @endfor
