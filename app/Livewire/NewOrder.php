@@ -191,11 +191,15 @@ class NewOrder extends Component
         ]);
 
         // Fetch next n rows from BingoCard after last ordered number
-        $lastOrder = OrderDetails::last();
+        $lastOrder = OrderDetails::orderBy('id', 'desc')->first();
+        $lastId = 0;
+        if (!empty($lastOrder)) {
+            $lastId = $lastOrder->id;
+        }
 
-        $bingoCards = BingoCards::where('id', '>', $lastOrder->bingo_card_id)
+        $bingoCards = BingoCards::where('id', '>', $lastId)
             ->limit($this->quantity)->get();
-            
+
         foreach($bingoCards as $bingoCard) {
             OrderDetails::create([
                 'order_id' => $order->id,
