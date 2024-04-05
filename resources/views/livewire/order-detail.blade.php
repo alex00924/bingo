@@ -69,7 +69,7 @@
             Cartões de bingo
         </h5>
 
-        <div class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="mt-4 grid grid-cols-2 lg:grid-cols-4 gap-4">
             @foreach ($order->orderDetails as $orderDetail)
                 <div class="w-full border border-yellow_border">
                     <img src="/imgs/card.jpeg" class="w-full" />
