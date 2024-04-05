@@ -37,7 +37,7 @@
                 @foreach ($orders as $order)
                     <tr class="bg-yellow_tr text-yellow_text">
                         <th scope="row" class="px-6 py-1 border-l-4 border-yellow_border rounded-l-2xl">
-                            <img src="/imgs/card.jpeg" class="h-12">
+                            <img src="/storage/imgs/card.jpeg" class="h-12">
                         </th>
                         <td class="px-6 py-1">
                             {{$order->id}}

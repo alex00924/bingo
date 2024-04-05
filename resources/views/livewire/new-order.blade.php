@@ -3,7 +3,7 @@
         @case(1)
             <div class="flex justify-center">
                 <div class="block w-full max-w-lg p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <img src="/imgs/header.jpeg" class="w-full"/>
+                    <img src="/storage/imgs/header.jpeg" class="w-full"/>
                     <h5 class="mt-4 mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
                         SHOW DE PRÉMIOS D'BILHAR
                     </h5>
