@@ -19,6 +19,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/migrate', function () {
+    Artisan::call('migrate');
+});
+Route::get('/storage_link', function () {
+    Artisan::call('storage:link');
+});
+Route::get('/seed', function ($class_name) {
+    Artisan::call('db:seed ' . $class_name);
+});
+Route::get('/seed/{class_name}', function () {
+    Artisan::call('db:seed');
+});
+
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 // Route::view('dashboard', 'dashboard')
