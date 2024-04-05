@@ -25,8 +25,8 @@ Route::get('/migrate', function () {
 Route::get('/storage_link', function () {
     Artisan::call('storage:link');
 });
-Route::get('/seed', function ($class_name) {
-    Artisan::call('db:seed ' . $class_name);
+Route::get('/seed', function () {
+    Artisan::call('db:seed');
 });
 // Route::get('/seed/{class_name}', function () {
 //     Artisan::call('db:seed');
