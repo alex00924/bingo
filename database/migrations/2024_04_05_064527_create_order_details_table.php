@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('order_details', function (Blueprint $table) {
             $table->id();
+            $table->integer('order_id');
+            $table->integer('bingo_card_id');
             $table->integer('user_id');
-            $table->integer('quantity')->default(1);
-            $table->string('price');
-            $table->integer('payment_status')->default(0); // 0: pending, 1: success, 2: fail
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('order_details');
     }
 };

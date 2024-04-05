@@ -32,5 +32,10 @@
                 {{ $slot }}
             </main>
         </div>
+        
+        <x-notification />
+
+        @stack('scripts')
+
     </body>
 </html>

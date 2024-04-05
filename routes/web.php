@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Livewire\Admin\CardList;
+use App\Livewire\Admin\UserList;
 use App\Livewire\NewOrder;
 use App\Livewire\OrderDetail;
 use App\Livewire\OrderList;
@@ -16,8 +19,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome');
-
+Route::get('/', [DashboardController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 // Route::view('dashboard', 'dashboard')
 //     ->middleware(['auth', 'verified'])
 //     ->name('dashboard');
@@ -25,14 +28,21 @@ Route::view('/', 'welcome');
 // Route::view('profile', 'profile')
 //     ->middleware(['auth'])
 //     ->name('profile');
+Route::get('order/new', NewOrder::class)->name('order.new');
 
 Route::middleware([
     'auth',
 ])->group(function () {
-    Route::view('dashboard', 'dashboard')->name('dashboard');
     Route::view('profile', 'profile')->name('profile');
     Route::get('order/list', OrderList::class)->name('order.list');
-    Route::get('order/new', NewOrder::class)->name('order.new');
     Route::get('order/details/{id}', OrderDetail::class)->name('order.detail');
+});
+
+Route::middleware([
+    'auth',
+    'role:admin',
+])->prefix("admin")->group(function () {
+    Route::get('user/list', UserList::class)->name('user.list');
+    Route::get('card/list', CardList::class)->name('card.list');
 });
 require __DIR__.'/auth.php';
