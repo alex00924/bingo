@@ -51,14 +51,24 @@ class NewOrder extends Component
         if ($this->processStatus == 1) {
             $this->validate();
 
+            $user = User::where('phone', $this->phone)->first();
+            if (empty($user)) {
+                $user = User::create([
+                    'name' => $this->name,
+                    'phone' => $this->phone,
+                    'email' => $this->phone,
+                    'password' => Hash::make('123456789'),
+                    'city' => $this->city
+                ]);
 
-            $user = Auth::user();
-            
+                event(new Registered($user));
+            }
+
             $user->name = $this->name;
             $user->city = $this->city;
-            $user->email = $this->phone;
-            $user->phone = $this->phone;
             $user->save();
+
+            Auth::login($user);
         }
         $this->processStatus += 1;
         if ($this->processStatus == 3) {

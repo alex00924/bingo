@@ -7,7 +7,7 @@
         </a>
     </div>
     <div class="mt-4 w-full overflow-auto">
-        <table class="w-full text-sm md:text-lg text-left rtl:text-right text-gray-500 dark:text-gray-400 border-separate border-spacing-0">
+        <table class="w-full text-sm md:text-lg text-left rtl:text-right text-gray-500 dark:text-gray-400 border-separate border-spacing-y-1">
             <thead class="text-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3">

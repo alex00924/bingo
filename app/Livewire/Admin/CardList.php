@@ -8,6 +8,6 @@ class CardList extends Component
 {
     public function render()
     {
-        return view('livewire.admin.card-list');
+        return view('livewire.admin.card-list')->layout('layouts.admin');
     }
 }

@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Livewire\Admin\CardImages;
 use App\Livewire\Admin\CardList;
 use App\Livewire\Admin\UserList;
+use App\Livewire\Admin\OrderList as AdminOrderList;
 use App\Livewire\NewOrder;
 use App\Livewire\OrderDetail;
 use App\Livewire\OrderList;
@@ -42,20 +44,22 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 //     ->middleware(['auth'])
 //     ->name('profile');
 
+Route::get('order/new', NewOrder::class)->name('order.new');
+
 Route::middleware([
     'auth',
 ])->group(function () {
     Route::view('profile', 'profile')->name('profile');
     Route::get('order/list', OrderList::class)->name('order.list');
     Route::get('order/details/{id}', OrderDetail::class)->name('order.detail');
-    Route::get('order/new', NewOrder::class)->name('order.new');
 });
 
 Route::middleware([
     'auth',
     'role:admin',
 ])->prefix("admin")->group(function () {
-    Route::get('user/list', UserList::class)->name('user.list');
-    Route::get('card/list', CardList::class)->name('card.list');
+    Route::get('user/list', UserList::class)->name('admin.user.list');
+    Route::get('order/list', AdminOrderList::class)->name('admin.order.list');
+    Route::get('card-imgs', CardImages::class)->name('admin.card.imgs');
 });
 require __DIR__.'/auth.php';

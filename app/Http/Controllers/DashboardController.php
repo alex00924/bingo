@@ -10,11 +10,9 @@ class DashboardController extends Controller
     {
         if (auth()->check()) {
             if (auth()->user()->hasRole("admin")) {
-                return redirect(route("card.list"));
-            } else {
-                return redirect(route("order.new"));
+                return redirect(route("admin.order.list"));
             }
         }
-        return redirect(route("login"));
+        return redirect(route("order.new"));
     }
 }
