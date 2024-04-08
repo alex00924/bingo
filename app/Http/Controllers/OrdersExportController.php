@@ -40,7 +40,7 @@ class OrdersExportController extends Controller
         {
             $FH = fopen('php://output', 'w');
             foreach ($exportData as $row) { 
-                fputcsv($FH, $row);
+                fputcsv($FH, $row, ";");
             }
             fclose($FH);
         };
