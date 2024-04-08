@@ -103,7 +103,7 @@
                         TOTAL DE CARTELAS: {{$quantity}}
                     </P>
                     <p class="mt-2 text-xl font-bold text-gray-900 text-center">
-                        VALOR TOTAL: R$ {{$quantity*10}}
+                        VALOR TOTAL: R$ {{$quantity*$cardPrice}}
                     </P>
 
                     <div class="bg-sky-100 border-l-4 border-l-sky-600 rounded-lg mt-8 p-2">
