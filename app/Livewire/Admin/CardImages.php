@@ -15,11 +15,13 @@ class CardImages extends Component
         switch($propertyName) {
             case "cardImage":
                 $this->cardImage->storeAs('public/imgs/card.jpeg');
-                $this->redirect(route('admin.card.imgs'));
+                $this->reset();
+                // $this->redirect(route('admin.card.imgs'));
                 break;
             case "headerImage":
                 $this->headerImage->storeAs('public/imgs/header.jpeg');
-                $this->redirect(route('admin.card.imgs'));
+                $this->reset();
+                // $this->redirect(route('admin.card.imgs'));
                 break;
         }
     }

@@ -96,9 +96,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @for($row=0; $row < 5; $row+=1)
+                                @for($column=0; $column < 5; $column+=1)
                                     <tr class="bg-white">
-                                        @for($column=0; $column < 5; $column+=1)
+                                        @for($row=0; $row < 5; $row+=1)        
                                             <td class="md:p-2 border border-gray-500">
                                                 {{$orderDetail->bingoCard['d' . ($row * 5 + $column + 1)]}}
                                             </td>
