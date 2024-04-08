@@ -26,6 +26,6 @@ class CardPrice extends Component
 
     public function render()
     {
-        return view('livewire.admin.card-price');
+        return view('livewire.admin.card-price')->layout('layouts.admin');
     }
 }
