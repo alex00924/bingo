@@ -21,7 +21,7 @@
 
             <div class="max-w-7xl mx-auto p-6 lg:p-8">
                 <div class="flex justify-center">
-                    <img src="/storage/imgs/header.jpeg" class="w-full h-auto max-w-full max-h-screen"/>
+                    <img src="/storage/imgs/header.jpeg?dummy={{rand()}}" class="w-full h-auto max-w-full max-h-screen"/>
                 </div>
             </div>
         </div>

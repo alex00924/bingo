@@ -72,7 +72,7 @@
         <div class="mt-4 grid grid-cols-2 lg:grid-cols-4 gap-4">
             @foreach ($order->orderDetails as $orderDetail)
                 <div class="w-full border border-yellow_border">
-                    <img src="/storage/imgs/card.jpeg" class="w-full" />
+                    <img src="/storage/imgs/card.jpeg?dummy={{rand()}}" class="w-full" />
                     <div class="bg-white p-4">
                         <p class="pl-4 md:pl-8 my-2 md:my-4 text-xl font-bold text-gray-900 dark:text-gray-200">Nº <span class="underline">{{$orderDetail->bingoCard['card_number']}}-{{$orderDetail->bingoCard['card_digit']}}</p>
                         <table class="w-full text-xl text-center text-gray-900 dark:text-gray-200">
