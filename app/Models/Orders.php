@@ -27,6 +27,6 @@ class Orders extends Model
             $cardNumbers[] = $detail->bingoCard->card_number;
         }
 
-        return implode(" | ", $cardNumbers);
+        return implode(",", $cardNumbers);
     }
 }
