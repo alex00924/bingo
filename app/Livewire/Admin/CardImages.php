@@ -14,11 +14,11 @@ class CardImages extends Component
     public function updated($propertyName) {
         switch($propertyName) {
             case "cardImage":
-                $this->cardImage->storeAs('public/imgs/card.jpeg?dummy={{rand()}}');
+                $this->cardImage->storeAs('public/imgs/card.jpeg');
                 $this->redirect(route('admin.card.imgs'));
                 break;
             case "headerImage":
-                $this->headerImage->storeAs('public/imgs/header.jpeg?dummy={{rand()}}');
+                $this->headerImage->storeAs('public/imgs/header.jpeg');
                 $this->redirect(route('admin.card.imgs'));
                 break;
         }
