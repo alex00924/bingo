@@ -28,6 +28,7 @@ class NewOrder extends Component
     public string $qr_code_base64 = '';
     public string $ticket_url = '';
     public string $payment_request_id = '';
+    public $cardPrice = 10;
 
     protected function rules()
     {
@@ -45,6 +46,8 @@ class NewOrder extends Component
             $this->city = auth()->user()->city??'';
             $this->phone = auth()->user()->phone??'';
         }
+
+        $this->cardPrice = \App\Models\CardPrice::getPrice();
     }
 
     public function nextStep() {
@@ -96,7 +99,7 @@ class NewOrder extends Component
             // $area_code = 
             // Step 4: Create the request array
             $requestData = [
-                "transaction_amount" => $this->quantity * 10,
+                "transaction_amount" => $this->quantity * $this->cardPrice,
                 // "token" => "YOUR_CARD_TOKEN",
                 "description" => "Pagamento de Prêmios D'BILHAR",
                 "payment_method_id" => "pix",
@@ -152,7 +155,7 @@ class NewOrder extends Component
             $firstname = implode(" ", $name_parts);
             
             $expireDate = date("Y-m-d\TH:i:s.000P", strtotime("+30 minutes"));
-            $payment->transaction_amount = $this->quantity * 10;
+            $payment->transaction_amount = $this->quantity * $this->cardPrice;
             $payment->description = "Pagamento de Prêmios D'BILHAR";
             $payment->payment_method_id = "pix";
             $payment->date_of_expiration = $expireDate;
@@ -192,7 +195,7 @@ class NewOrder extends Component
         $order = Orders::create([
             'user_id' => $user_id,
             'quantity' => $this->quantity,
-            'price' => $this->quantity * 10,
+            'price' => $this->quantity * $this->cardPrice,
             'payment_status' => 0,
             'payment_id' => $this->payment_request_id,
             'qr_code' => $this->qr_code,

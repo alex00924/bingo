@@ -85,7 +85,7 @@
                         <!-- Submit -->
                         <button class="w-full rounded-lg py-2 px-8 mt-4 flex justify-between bg-bright_yellow text-gray-900">
                             <span>COMPRAR</span>
-                            <span>R$ {{$quantity * 10}}</span>
+                            <span>R$ {{$quantity * $cardPrice}}</span>
                         </button>
                     </form>
                     
