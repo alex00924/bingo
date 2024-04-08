@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OrdersExportController;
 use App\Livewire\Admin\CardImages;
 use App\Livewire\Admin\CardList;
 use App\Livewire\Admin\UserList;
@@ -61,5 +62,6 @@ Route::middleware([
     Route::get('user/list', UserList::class)->name('admin.user.list');
     Route::get('order/list', AdminOrderList::class)->name('admin.order.list');
     Route::get('card-imgs', CardImages::class)->name('admin.card.imgs');
+    Route::get('order/export', [OrdersExportController::class, 'export'])->name('admin.order.export');
 });
 require __DIR__.'/auth.php';

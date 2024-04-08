@@ -10,10 +10,6 @@ class OrderList extends Component
 {
     use WithPagination;
  
-    public function downloadCSV() {
-
-    }
-
     public function render()
     {
         $orders = Orders::paginate(10);

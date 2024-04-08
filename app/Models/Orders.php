@@ -15,11 +15,18 @@ class Orders extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function bingoCard() {
-        return $this->belongsTo(BingoCards::class, 'bingo_card_id', 'id');
-    }
-
     public function orderDetails() {
         return $this->hasMany(OrderDetails::class, 'order_id', 'id');
+    }
+
+    public function cardNumbers() {
+        $orderDetails = $this->orderDetails;
+
+        $cardNumbers = [];
+        foreach($orderDetails as $detail) {
+            $cardNumbers[] = $detail->bingoCard->card_number;
+        }
+
+        return implode(", ", $cardNumbers);
     }
 }

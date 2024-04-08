@@ -43,7 +43,7 @@ class NewOrder extends Component
         if (auth()->check()) {
             $this->name = auth()->user()->name??'';
             $this->city = auth()->user()->city??'';
-            $this->phone = auth()->user()->phone;
+            $this->phone = auth()->user()->phone??'';
         }
     }
 

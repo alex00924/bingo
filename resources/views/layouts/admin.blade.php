@@ -19,7 +19,7 @@
     </head>
     <body class="font-sans antialiased dark">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            <x-navigation-menu-admin />
+            <livewire:layout.navigation-menu-admin />
             <x-side-bar />
             
             <!-- Page Heading -->

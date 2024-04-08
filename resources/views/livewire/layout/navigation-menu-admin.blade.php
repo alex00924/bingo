@@ -60,10 +60,12 @@ new class extends Component
 
                         <div class="border-t border-gray-200 dark:border-gray-600"></div>
 
-                        <x-dropdown-link href="{{ route('logout') }}"
-                            wire:click="logout">
-                            {{ __('Log Out') }}
-                        </x-dropdown-link>
+                        <!-- Authentication -->
+                        <button wire:click="logout" class="w-full text-start">
+                            <x-dropdown-link>
+                                {{ __('Sair') }}
+                            </x-dropdown-link>
+                        </button>
                     </x-slot>
                 </x-dropdown>
             </div>
