@@ -39,8 +39,8 @@ class CheckPaymentStatus implements ShouldQueue
                 $order->payment_status = 1;
                 $order->save();
             } else {
-                // $order->orderDetails()->delete();
-                // $order->delete();
+                $order->orderDetails()->delete();
+                $order->delete();
             }
         }
         
