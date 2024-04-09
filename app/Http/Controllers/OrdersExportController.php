@@ -29,6 +29,13 @@ class OrdersExportController extends Controller
             $orderDetail['NOMECILENTE'] = $order->user->name;
             $orderDetail['FONECLIENTE'] = $order->user->phone;
             $orderDetail['VALOR'] = $order->price;
+            $paymentStatus = "Aguardando Pagamento";
+            if ($order->payment_status == 1)  {
+                $paymentStatus = "Pago";
+            } else if ($order->payment_status == 1)  {
+                $paymentStatus = "Falha no pagamento";
+            }
+            $orderDetail['Situação'] = $paymentStatus;
             $orderDetail['DATA'] = $order->created_at;
             $exportData[] = $orderDetail;
         }
