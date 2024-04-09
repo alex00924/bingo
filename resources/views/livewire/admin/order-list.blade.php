@@ -29,6 +29,9 @@
                     {{__('VALOR')}}
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    {{__('Situação')}}
+                </th>
+                <th scope="col" class="px-6 py-3">
                     {{__('DATA')}}
                 </th>
             </tr>
@@ -57,6 +60,24 @@
                         </td>
                         <td class="px-6 py-4">
                             {{$item->price}}
+                        </td>
+                        <td class="px-6 py-4">
+                            <p class="border border-yellow_text rounded-lg p-1">
+                                @switch($item->payment_status)
+                                    @case(0)
+                                        Aguardando Pagamento
+                                        @break
+                                    @case(1)
+                                        Pago
+                                        @break
+                                    @case(2)
+                                        Falha no pagamento
+                                        @break
+                                
+                                    @default
+                                        Aguardando Pagamento
+                                @endswitch
+                            </p>
                         </td>
                         <td class="px-6 py-4">
                             {{$item->created_at}}
