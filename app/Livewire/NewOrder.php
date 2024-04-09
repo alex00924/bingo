@@ -105,7 +105,7 @@ class NewOrder extends Component
                 "payment_method_id" => "pix",
                 "date_of_expiration" => $expireDate,
                 "payer" => [
-                    "email" => "contato@chapadahost.com.br",
+                    "email" => "dijalmapaulodasilva7@gmail.com",
                     "first_name" => $firstname,
                     "last_name" => $lastname,
                     "phone" => [

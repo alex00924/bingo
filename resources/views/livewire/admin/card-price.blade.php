@@ -4,7 +4,7 @@
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Preço do cartão</h5>
         </a>
         <div class="mt-5">
-            <x-input-label for="card-price" :value="__('TELEFONE')" />
+            <x-input-label for="card-price" :value="__('Preço do cartão')" />
             <x-text-input wire:model="price" id="card-price" class="block mt-1 w-full" name="card-price" required autofocus autocomplete="card-price" />
             <x-input-error :messages="$errors->get('price')" class="mt-2" />
         </div>
