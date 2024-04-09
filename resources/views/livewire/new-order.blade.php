@@ -169,7 +169,7 @@
                     <div class="flex justify-end">
                         <button class="py-2 px-6 md:px-12 mt-4 text-white bg-sky-600 rounded-lg"
                             wire:click="processOrder">
-                            FECHAR
+                            VER CARTELA
                         </button>
                     </div>
                 </div>
