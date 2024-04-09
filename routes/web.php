@@ -36,7 +36,7 @@ Route::get('/seed/{class_name}', function ($class_name) {
     Artisan::call('db:seed ' . $class_name);
 });
 
-Route::get('/artisan', function ($cmd) {
+Route::get('/artisan/{cmd}', function ($cmd) {
     Artisan::call($cmd);
 });
 
