@@ -22,7 +22,7 @@ class DashboardController extends Controller
         $date->modify('-5 minutes');
         $formatted_date = $date->format('Y-m-d H:i:s');
 
-        $orders = \App\Models\Orders::where('payment_status', 0)->where('created_at', '>=', $formatted_date)->get();
+        $orders = \App\Models\Orders::where('payment_status', 0)->where('created_at', '<=', $formatted_date)->get();
         var_dump($orders->toArray());
         return;
         $orders = \App\Models\Orders::where('payment_status', 0)->get();
