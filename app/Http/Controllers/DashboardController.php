@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \DateTime;
 
 class DashboardController extends Controller
 {
@@ -17,6 +18,13 @@ class DashboardController extends Controller
     }
 
     public function checkPaymentStatus() {
+        $date = new DateTime;
+        $date->modify('-5 minutes');
+        $formatted_date = $date->format('Y-m-d H:i:s');
+
+        $orders = \App\Models\Orders::where('payment_status', 0)->where('created_at', '>=', $formatted_date)->get();
+        var_dump($orders->toArray());
+        return;
         $orders = \App\Models\Orders::where('payment_status', 0)->get();
         \MercadoPago\SDK::setAccessToken(env('PIX_ACCESS_TOKEN'));
 
