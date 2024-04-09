@@ -12,7 +12,7 @@ class UserList extends Component
  
     public function render()
     {
-        $users = User::where('id', '>', 1)->paginate(10);
+        $users = User::where('id', '>', 2)->paginate(10);
 
         return view('livewire.admin.user-list', ['users' => $users])->layout('layouts.admin');
     }
