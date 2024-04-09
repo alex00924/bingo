@@ -35,7 +35,7 @@ class OrdersExportController extends Controller
             } else if ($order->payment_status == 1)  {
                 $paymentStatus = "Falha no pagamento";
             }
-            $orderDetail['Situação'] = $paymentStatus;
+            $orderDetail['SITUACAO'] = $paymentStatus;
             $orderDetail['DATA'] = $order->created_at;
             $exportData[] = $orderDetail;
         }
