@@ -73,10 +73,13 @@ class NewOrder extends Component
 
             Auth::login($user);
         }
-        $this->processStatus += 1;
-        if ($this->processStatus == 3) {
+
+        if ($this->processStatus == 2) {
             $this->createPaymentRequest();
+            $this->createOrder();
         }
+        $this->processStatus += 1;
+        
     }
 
     private function createPaymentRequest_New() {
@@ -192,7 +195,7 @@ class NewOrder extends Component
         $this->quantity = max(1, $this->quantity);
     }
 
-    public function processOrder() {
+    private function createOrder() {
         $user_id = auth()->user()->id;
         // Create Orders
         $order = Orders::create([
@@ -223,7 +226,9 @@ class NewOrder extends Component
                 'user_id' => $user_id
             ]);
         }
-        
+    }
+
+    public function processOrder() {
         // redirect to order list page
         $this->redirectRoute('order.list');
     }
