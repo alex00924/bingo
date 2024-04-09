@@ -11,6 +11,9 @@
             <thead class="text-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3">
+                        Ver
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         Sorteio
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -28,17 +31,20 @@
                     <th scope="col" class="px-6 py-3">
                         Situação
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        Ver
-                    </th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($orders as $order)
                     <tr class="bg-yellow_tr text-yellow_text">
-                        <th scope="row" class="px-6 py-1 border-l-4 border-yellow_border rounded-l-2xl">
+                        <td class="px-6 py-1">
+                            <a href="{{route('order.detail', $order->id)}}"
+                                class="cursor-pointer text-white border bg-blue-600 hover:bg-blue-700 rounded-lg p-2.5 text-center inline-flex items-center me-2">
+                                Ver
+                            </a>
+                        </td>
+                        <td class="px-6 py-1 border-l-4 border-yellow_border rounded-l-2xl">
                             <img src="/storage/imgs/card.jpeg?dummy={{rand()}}" class="h-12">
-                        </th>
+                        </td>
                         <td class="px-6 py-1">
                             {{$order->id}}
                         </td>
@@ -68,12 +74,6 @@
                                         Aguardando Pagamento
                                 @endswitch
                             </p>
-                        </td>
-                        <td class="px-6 py-1">
-                            <a href="{{route('order.detail', $order->id)}}"
-                                class="cursor-pointer text-white border bg-blue-600 hover:bg-blue-700 rounded-lg p-2.5 text-center inline-flex items-center me-2">
-                                Ver
-                            </a>
                         </td>
                     </tr>
                 @endforeach
