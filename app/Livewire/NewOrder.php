@@ -153,19 +153,22 @@ class NewOrder extends Component
             $name_parts = explode(" ", $this->name);
             $lastname = array_pop($name_parts);
             $firstname = implode(" ", $name_parts);
-            
+            $phoneNumber = preg_replace('/[^\d]/i', "", $this->phone);
+            $area_code = substr($this->phone, 0, 2);
+
             $expireDate = date("Y-m-d\TH:i:s.000P", strtotime("+30 minutes"));
             $payment->transaction_amount = $this->quantity * $this->cardPrice;
             $payment->description = "Pagamento de Prêmios D'BILHAR";
             $payment->payment_method_id = "pix";
             $payment->date_of_expiration = $expireDate;
+
             $payment->payer = [
                 "email" => "contato@chapadahost.com.br",
                 "first_name" => $firstname,
                 "last_name" => $lastname,
                 "phone" => [
-                    "area_code" => 11,
-                    "number" => $this->phone
+                    "area_code" => $area_code,
+                    "number" => $phoneNumber
                 ],
                 "address" => [
                     "city" => $this->city
