@@ -36,6 +36,10 @@ Route::get('/seed/{class_name}', function ($class_name) {
     Artisan::call('db:seed ' . $class_name);
 });
 
+Route::get('/artisan', function ($cmd) {
+    Artisan::call($cmd);
+});
+
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/check-payment-status', [DashboardController::class, 'checkPaymentStatus']);
