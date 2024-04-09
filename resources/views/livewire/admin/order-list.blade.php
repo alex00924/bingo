@@ -62,20 +62,26 @@
                             {{$item->price}}
                         </td>
                         <td class="px-6 py-4">
-                            <p class="border border-yellow_text rounded-lg p-1">
-                                @switch($item->payment_status)
-                                    @case(0)
+                            @switch($item->payment_status)
+                                @case(0)
+                                    <p class="border border-yellow_text rounded-lg p-1">
                                         Aguardando Pagamento
-                                        @break
-                                    @case(1)
+                                    </p>
+                                    @break
+                                @case(1)
+                                    <p class="border border-sky-500 rounded-lg p-1">
                                         Pago
-                                        @break
-                                    @case(2)
+                                    </p>
+                                    @break
+                                @case(2)
+                                    <p class="border border-red-500 rounded-lg p-1">
                                         Falha no pagamento
-                                        @break
-                                
-                                    @default
+                                    </p>
+                                    @break
+                                @default
+                                    <p class="border border-yellow_text rounded-lg p-1">
                                         Aguardando Pagamento
+                                    </p>
                                 @endswitch
                             </p>
                         </td>
