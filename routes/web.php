@@ -32,9 +32,9 @@ Route::get('/storage_link', function () {
 Route::get('/seed', function () {
     Artisan::call('db:seed');
 });
-// Route::get('/seed/{class_name}', function () {
-//     Artisan::call('db:seed');
-// });
+Route::get('/seed/{class_name}', function ($class_name) {
+    Artisan::call('db:seed ' . $class_name);
+});
 
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
