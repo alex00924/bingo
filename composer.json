@@ -13,7 +13,7 @@
         "livewire/livewire": "^3.4",
         "livewire/volt": "^1.0",
         "maatwebsite/excel": "^3.1",
-        "mercadopago/dx-php": "3.0.4",
+        "mercadopago/dx-php": "2.6",
         "spatie/laravel-permission": "^6.4"
     },
     "require-dev": {

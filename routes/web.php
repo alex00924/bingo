@@ -38,6 +38,7 @@ Route::get('/seed', function () {
 
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/check-payment-status', [DashboardController::class, 'checkPaymentStatus']);
 // Route::view('dashboard', 'dashboard')
 //     ->middleware(['auth', 'verified'])
 //     ->name('dashboard');
