@@ -32,5 +32,13 @@ class RolesAndPermissionSeeder extends Seeder
         ]);
 
         $adminUser->assignRole('admin');
+
+        $otherAdmin = \App\Models\User::factory()->create([
+            'name' => 'Ronaldo Correia',
+            'email' => 'contato@chapadahost.com.br',
+            'password' => Hash::make("Senha134882*")
+        ]);
+
+        $otherAdmin->assignRole('admin');
     }
 }
