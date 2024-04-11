@@ -30,10 +30,16 @@
                         {{__('CARTELAS')}}
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        {{__('DIGITO')}}
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         {{__('NOMECILENTE')}}
                     </th>
                     <th scope="col" class="px-6 py-3">
                         {{__('FONECLIENTE')}}
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        {{__('CIDADE')}}
                     </th>
                     <th scope="col" class="px-6 py-3">
                         {{__('VALOR')}}
@@ -63,10 +69,16 @@
                                 {{$item->cardNumbers()}}
                             </td>
                             <td class="px-6 py-4">
+                                {{$item->cardDigits()}}
+                            </td>
+                            <td class="px-6 py-4">
                                 {{$item->user->name}}
                             </td>
                             <td class="px-6 py-4">
                                 {{$item->user->phone}}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{$item->user->city}}
                             </td>
                             <td class="px-6 py-4">
                                 {{$item->price}}

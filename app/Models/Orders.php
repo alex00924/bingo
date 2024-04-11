@@ -29,4 +29,15 @@ class Orders extends Model
 
         return implode(",", $cardNumbers);
     }
+    
+    public function cardDigits() {
+        $orderDetails = $this->orderDetails;
+
+        $cardNumbers = [];
+        foreach($orderDetails as $detail) {
+            $cardNumbers[] = $detail->bingoCard->card_digit;
+        }
+
+        return implode(",", $cardNumbers);
+    }
 }
