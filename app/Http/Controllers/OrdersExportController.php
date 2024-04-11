@@ -26,7 +26,6 @@ class OrdersExportController extends Controller
             $orderDetail = [];
             $orderDetail['IDVENDA'] = $order->id;
             $orderDetail['CARTELAS'] = $order->cardNumbers();
-            $orderDetail['DIGITO'] = $order->cardDigits();
             $orderDetail['NOMECILENTE'] = $order->user->name;
             $orderDetail['FONECLIENTE'] = $order->user->phone;
             $orderDetail['CIDADE'] = $order->user->city;

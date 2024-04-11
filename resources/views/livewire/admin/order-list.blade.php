@@ -30,9 +30,6 @@
                         {{__('CARTELAS')}}
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        {{__('DIGITO')}}
-                    </th>
-                    <th scope="col" class="px-6 py-3">
                         {{__('NOMECILENTE')}}
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -55,7 +52,7 @@
             <tbody>
                 @if(empty($orders) || count($orders) < 1)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th scope="row" colspan="7" class="text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <th scope="row" colspan="8" class="text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             Sem dados
                         </th>
                     </tr>            
@@ -67,9 +64,6 @@
                             </th>
                             <td class="px-6 py-4">
                                 {{$item->cardNumbers()}}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{$item->cardDigits()}}
                             </td>
                             <td class="px-6 py-4">
                                 {{$item->user->name}}

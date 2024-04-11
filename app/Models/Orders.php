@@ -24,7 +24,7 @@ class Orders extends Model
 
         $cardNumbers = [];
         foreach($orderDetails as $detail) {
-            $cardNumbers[] = $detail->bingoCard->card_number;
+            $cardNumbers[] = $detail->bingoCard->card_number . $detail->bingoCard->card_digit;
         }
 
         return implode(",", $cardNumbers);
