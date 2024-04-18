@@ -20,7 +20,7 @@ new #[Layout('layouts.guest')] class extends Component
     public function login(): void
     {
         $validated = $this->validate([
-            'phone' => ['required', 'regex:/([0-9]{2})[0-9]{5}-[0-9]{4}/'],
+            'phone' => ['required', 'regex:/\([0-9]{2}\)[0-9]{5}-[0-9]{4}/'],
         ]);
 
         $user = User::where('phone', $this->phone)->first();

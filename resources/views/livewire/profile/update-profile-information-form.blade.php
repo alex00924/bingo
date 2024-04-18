@@ -33,7 +33,7 @@ new class extends Component
 
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'regex:/([0-9]{2})[0-9]{5}-[0-9]{4}/', Rule::unique(User::class)->ignore($user->id)],
+            'phone' => ['required', 'regex:/\([0-9]{2}\)[0-9]{5}-[0-9]{4}/', Rule::unique(User::class)->ignore($user->id)],
             'city' => ['required', 'string', 'max:255'],
         ]);
         $validated['email'] = $this->phone;

@@ -26,7 +26,7 @@ new #[Layout('layouts.guest')] class extends Component
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
-            'phone' => ['required', 'regex:/([0-9]{2})[0-9]{5}-[0-9]{4}/'],
+            'phone' => ['required', 'regex:/\([0-9]{2}\)[0-9]{5}-[0-9]{4}/'],
             'city' => ['required', 'string', 'max:255'],
         ]);
 
