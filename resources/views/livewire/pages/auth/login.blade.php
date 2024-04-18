@@ -19,6 +19,10 @@ new #[Layout('layouts.guest')] class extends Component
      */
     public function login(): void
     {
+        $validated = $this->validate([
+            'phone' => ['required', 'regex:/([0-9]{2})[0-9]{5}-[0-9]{4}/'],
+        ]);
+
         $user = User::where('phone', $this->phone)->first();
         if (empty($user)) {
             $user = User::create([
@@ -44,7 +48,7 @@ new #[Layout('layouts.guest')] class extends Component
         <!-- Email Address -->
         <div>
             <x-input-label for="phone" :value="__('TELEFONE')" />
-            <x-text-input wire:model="phone" id="phone" class="block mt-1 w-full" name="phone" required autofocus autocomplete="phone" />
+            <x-text-input wire:model="phone" id="phone" class="block mt-1 w-full" name="phone" required autofocus autocomplete="phone" placeholder="(__)_____-____"/>
             <x-input-error :messages="$errors->get('form.phone')" class="mt-2" />
         </div>
 

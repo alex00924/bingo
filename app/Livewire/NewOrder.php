@@ -34,7 +34,7 @@ class NewOrder extends Component
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'phone' => ['required'], //, 'regex:/([0-9]{9})[0-9]{9}/'
+            'phone' => ['required', 'regex:/([0-9]{2})[0-9]{5}-[0-9]{4}/'],
             'city' => ['required', 'string', 'max:255'],
             'quantity' => ['required', 'integer', 'gt:0']
         ];
@@ -79,7 +79,7 @@ class NewOrder extends Component
             $this->createOrder();
         }
         $this->processStatus += 1;
-        
+
     }
 
     private function createPaymentRequest_New() {
@@ -96,10 +96,10 @@ class NewOrder extends Component
             $name_parts = explode(" ", $this->name);
             $lastname = array_pop($name_parts);
             $firstname = implode(" ", $name_parts);
-            
+
             $expireDate = date("Y-m-d\TH:i:s.000P", strtotime("+30 minutes"));
-            
-            // $area_code = 
+
+            // $area_code =
             // Step 4: Create the request array
             $requestData = [
                 "transaction_amount" => $this->quantity * $this->cardPrice,
@@ -124,7 +124,7 @@ class NewOrder extends Component
             // Step 5: Create the request options, setting X-Idempotency-Key
             $request_options = new RequestOptions();
             $idempotency_key = Str::random(10);
-            
+
             $request_options->setCustomHeaders(["X-Idempotency-Key: " . $idempotency_key]);
 
             // Step 6: Make the request
@@ -158,6 +158,7 @@ class NewOrder extends Component
             $firstname = implode(" ", $name_parts);
             $phoneNumber = preg_replace('/[^\d]/i', "", $this->phone);
             $area_code = substr($this->phone, 0, 2);
+            $phoneNumber = substr($phoneNumber, 2);
 
             $expireDate = date("Y-m-d\TH:i:s.000P", strtotime("+30 minutes"));
             $payment->transaction_amount = $this->quantity * $this->cardPrice;
