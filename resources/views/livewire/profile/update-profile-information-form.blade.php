@@ -96,6 +96,7 @@ new class extends Component
                     </svg>
                 </div>
                 <x-text-input wire:model="phone" id="phone" class="block mt-1 w-full ps-10 p-2.5" name="phone" required placeholder="(__)_____-____"/>
+                <span class="text-red-500 text-sm">* Insira o formato exato como (12)12345-6789</span>
             </div>
             <x-input-error :messages="$errors->get('phone')" class="mt-2" />
         </div>

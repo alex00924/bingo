@@ -49,6 +49,7 @@ new #[Layout('layouts.guest')] class extends Component
         <div>
             <x-input-label for="phone" :value="__('TELEFONE')" />
             <x-text-input wire:model="phone" id="phone" class="block mt-1 w-full" name="phone" required autofocus autocomplete="phone" placeholder="(__)_____-____"/>
+            <span class="text-red-500 text-sm">* Insira o formato exato como (12)12345-6789</span>
             <x-input-error :messages="$errors->get('form.phone')" class="mt-2" />
         </div>
 
