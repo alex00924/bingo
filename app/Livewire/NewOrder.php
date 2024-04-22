@@ -34,7 +34,7 @@ class NewOrder extends Component
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'regex:/\([0-9]{2}\)[0-9]{5}-[0-9]{4}/'],
+            'phone' => ['required', 'regex:/\([0-9]{2}\) [0-9]{5}-[0-9]{4}/'],
             'city' => ['required', 'string', 'max:255'],
             'quantity' => ['required', 'integer', 'gt:0']
         ];

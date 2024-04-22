@@ -10,7 +10,7 @@ class Orders extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    
+
     public function user() {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
@@ -24,12 +24,12 @@ class Orders extends Model
 
         $cardNumbers = [];
         foreach($orderDetails as $detail) {
-            $cardNumbers[] = $detail->bingoCard->card_number . $detail->bingoCard->card_digit;
+            $cardNumbers[] = $detail->bingoCard->card_number . "-" . $detail->bingoCard->card_digit;
         }
 
         return implode(",", $cardNumbers);
     }
-    
+
     public function cardDigits() {
         $orderDetails = $this->orderDetails;
 

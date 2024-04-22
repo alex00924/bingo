@@ -30,7 +30,7 @@ class OrderList extends Component
         if (!empty($this->cardFilter)) {
             $orders = Orders::whereHas('orderDetails', function (Builder $query) {
                 $query->whereHas('bingoCard', function (Builder $query) {
-                    $query->where('card_number', 'like', "%" . $this->cardFilter . "%");
+                    $query->where('card_number', 'like', "%" . $this->cardFilter);
                 });
             })->paginate(10);
         }
