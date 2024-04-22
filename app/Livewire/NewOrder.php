@@ -65,11 +65,22 @@ class NewOrder extends Component
                 ]);
 
                 event(new Registered($user));
+            } else {
+                if (empty($user->name)) {
+                    $user->name = $this->name;
+                    $user->save();
+                } else {
+                    $this->name = $user->name;
+                }
+
+                if (empty($user->city)) {
+                    $user->city = $this->city;
+                    $user->save();
+                } else {
+                    $this->city = $user->city;
+                }
             }
 
-            $user->name = $this->name;
-            $user->city = $this->city;
-            $user->save();
 
             Auth::login($user);
         }
