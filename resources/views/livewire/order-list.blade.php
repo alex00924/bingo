@@ -36,13 +36,13 @@
             <tbody>
                 @foreach ($orders as $order)
                     <tr class="bg-yellow_tr text-yellow_text">
-                        <td class="px-6 py-1">
+                        <td class="px-6 py-1 border-l-4 border-yellow_border rounded-l-2xl">
                             <a href="{{route('order.detail', $order->id)}}"
                                 class="cursor-pointer text-white border bg-blue-600 hover:bg-blue-700 rounded-lg p-2.5 text-center inline-flex items-center me-2">
                                 Ver
                             </a>
                         </td>
-                        <td class="px-6 py-1 border-l-4 border-yellow_border rounded-l-2xl">
+                        <td class="px-6 py-1">
                             <img src="/storage/imgs/card.jpeg?dummy={{rand()}}" class="h-12">
                         </td>
                         <td class="px-6 py-1">
@@ -69,7 +69,7 @@
                                     @case(2)
                                         Falha no pagamento
                                         @break
-                                
+
                                     @default
                                         Aguardando Pagamento
                                 @endswitch
