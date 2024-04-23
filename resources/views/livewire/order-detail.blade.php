@@ -5,7 +5,7 @@
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
                     DETALHES DO PEDIDO
                 </h5>
-                
+
                 <div class="bg-yellow-100 border-l-4 border-l-yellow_border rounded-lg mt-4 p-2">
                     <p class="text-yellow_border my-2 text-center">
                         Data Pedido: {{$order->created_at}}
@@ -14,7 +14,7 @@
 
                 <div class="bg-yellow-100 border-l-4 border-l-yellow_border rounded-lg mt-4 p-2">
                     <p class="text-yellow_border my-2 text-center">
-                        Situação: 
+                        Situação:
                         @switch($order->payment_status)
                             @case(0)
                                 Aguardando Pagamento
@@ -25,7 +25,7 @@
                             @case(2)
                                 Falha no pagamento
                                 @break
-                        
+
                             @default
                                 Aguardando Pagamento
                         @endswitch
@@ -64,7 +64,7 @@
                 @endif
             </div>
         </div>
-    
+
         <h5 class="mt-8 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
             Cartões de bingo
         </h5>
@@ -74,7 +74,7 @@
                 <div class="w-full border border-yellow_border">
                     <img src="/storage/imgs/card.jpeg?dummy={{rand()}}" class="w-full" />
                     <div class="bg-white p-4">
-                        <p class="pl-4 md:pl-8 my-2 md:my-4 text-xl font-bold text-gray-900 dark:text-gray-200">Nº <span class="underline">{{$orderDetail->bingoCard['card_number']}}-{{$orderDetail->bingoCard['card_digit']}}</p>
+                        <p class="pl-4 md:pl-8 my-2 md:my-4 text-xl font-bold text-gray-900 dark:text-gray-200"><span class="underline">{{$orderDetail->bingoCard['card_number']}}-{{$orderDetail->bingoCard['card_digit']}}</p>
                         <table class="w-full text-xl text-center text-gray-900 dark:text-gray-200">
                             <thead class="text-xl md:text-3xl font-bold uppercase bg-gray-500 text-white">
                                 <tr>
@@ -98,7 +98,7 @@
                             <tbody>
                                 @for($column=0; $column < 5; $column+=1)
                                     <tr class="bg-white">
-                                        @for($row=0; $row < 5; $row+=1)        
+                                        @for($row=0; $row < 5; $row+=1)
                                             <td class="md:p-2 border border-gray-500">
                                                 {{$orderDetail->bingoCard['d' . ($row * 5 + $column + 1)]}}
                                             </td>
