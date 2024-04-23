@@ -13,8 +13,13 @@ class OrderList extends Component
 {
     use WithPagination;
     public $cardFilter = '';
+    public $nameFilter = '';
 
-    public function filterCards() {
+    public function updated() {
+        $this->resetPage();
+    }
+
+    public function filterOrders() {
         $this->resetPage();
     }
 
@@ -26,14 +31,22 @@ class OrderList extends Component
 
     public function render()
     {
-        $orders = Orders::paginate(10);
+        $orders = Orders::query();
         if (!empty($this->cardFilter)) {
-            $orders = Orders::whereHas('orderDetails', function (Builder $query) {
+            $orders = $orders->whereHas('orderDetails', function (Builder $query) {
                 $query->whereHas('bingoCard', function (Builder $query) {
-                    $query->where('card_number', 'like', "%" . $this->cardFilter);
+                    $query->where('card_number', 'like', "%" . $this->cardFilter . "%");
                 });
-            })->paginate(10);
+            });
         }
+
+        if (!empty($this->nameFilter)) {
+            $orders = $orders->whereHas('user', function (Builder $query) {
+                $query->where('name', 'like', "%" . $this->nameFilter . "%");
+            });
+        }
+
+        $orders = $orders->paginate(10);
 
         return view('livewire.admin.order-list', ['orders' => $orders])->layout('layouts.admin');
     }
