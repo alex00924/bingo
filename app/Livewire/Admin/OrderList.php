@@ -42,7 +42,7 @@ class OrderList extends Component
 
         if (!empty($this->nameFilter)) {
             $orders = $orders->whereHas('user', function (Builder $query) {
-                $query->where('name', 'like', "%" . $this->nameFilter . "%");
+                $query->where('UPPER(`name`)', 'like', "%" . strtoupper($this->nameFilter) . "%");
             });
         }
 
