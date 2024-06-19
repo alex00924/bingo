@@ -17,7 +17,7 @@
         <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-bright_yellow selection:bg-red-500 selection:text-white">
             <div class="max-w-7xl mx-auto p-6 lg:p-8">
                 <div class="flex justify-center">
-                    <img src="/imgs/maintenance.png" class="w-full h-auto max-w-full max-h-screen"/>
+                    <img src="/imgs/maintenance1.png" class="w-full h-auto max-w-full max-h-screen"/>
                 </div>
             </div>
         </div>
