@@ -50,7 +50,10 @@ class NewOrder extends Component
                 'city' => ['required', 'string', 'max:255'],
                 'quantity' => ['required', 'integer', "min:$minimumPurchaseQuantity"]
             ];
-            $this->validate($rules);
+            $customMessage = [
+                'quantity.min' => 'O campo quantidade deve ser pelo menos :min.'
+            ];
+            $this->validate($rules, $customMessage);
 
             $user = User::where('phone', $this->phone)->first();
             if (empty($user)) {
