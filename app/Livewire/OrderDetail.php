@@ -8,7 +8,10 @@ use App\Models\Orders;
 class OrderDetail extends Component
 {
     public $order;
+    public $rand = "";
+
     public function mount($id) {
+        $this->rand = rand();
         $this->order = Orders::with('orderDetails')->findOrFail($id);
     }
 

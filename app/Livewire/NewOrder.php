@@ -30,16 +30,6 @@ class NewOrder extends Component
     public string $payment_request_id = '';
     public $cardPrice = 10;
 
-    protected function rules()
-    {
-        return [
-            'name' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'regex:/\([0-9]{2}\) [0-9]{5}-[0-9]{4}/'],
-            'city' => ['required', 'string', 'max:255'],
-            'quantity' => ['required', 'integer', 'gt:0']
-        ];
-    }
-
     public function mount() {
         if (auth()->check()) {
             $this->name = auth()->user()->name??'';
@@ -47,12 +37,20 @@ class NewOrder extends Component
             $this->phone = auth()->user()->phone??'';
         }
 
-        $this->cardPrice = \App\Models\CardPrice::getPrice();
+        $this->cardPrice = \App\Models\SiteSetting::getPrice();
     }
 
     public function nextStep() {
         if ($this->processStatus == 1) {
-            $this->validate();
+
+            $minimumPurchaseQuantity = \App\Models\SiteSetting::getMinimumPurchaseQuantity();
+            $rules = [
+                'name' => ['required', 'string', 'max:255'],
+                'phone' => ['required', 'regex:/\([0-9]{2}\) [0-9]{5}-[0-9]{4}/'],
+                'city' => ['required', 'string', 'max:255'],
+                'quantity' => ['required', 'integer', "min:$minimumPurchaseQuantity"]
+            ];
+            $this->validate($rules);
 
             $user = User::where('phone', $this->phone)->first();
             if (empty($user)) {

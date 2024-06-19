@@ -11,7 +11,7 @@
                         COMPRAR CARTELA
                     </h5>
                     <p class="my-2 text-xl font-bold text-red-500 text-center">
-                        VALOR DA CARTELA R$: 10,00
+                        VALOR DA CARTELA R$: {{ $cardPrice }}
                     </P>
                     <form wire:submit="nextStep" class="text-xl">
                         <!-- Name -->

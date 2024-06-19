@@ -36,15 +36,18 @@ new class extends Component
                         <x-nav-link :href="route('order.list')" :active="request()->routeIs('order.list')" wire:navigate>
                             {{ __('Meus Pedidos') }}
                         </x-responsive-nav-link>
+                        <x-nav-link :href="route('customer.cards')" :active="request()->routeIs('customer.cards')" wire:navigate>
+                            {{ __('Meus cartões') }}
+                        </x-responsive-nav-link>
                     @else
                         <x-nav-link :href="route('login')" wire:navigate>
                             {{ __('Entrar') }}
                         </x-responsive-nav-link>
                     @endauth
                 </div>
-                
+
             </div>
-            
+
             @auth
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -88,7 +91,7 @@ new class extends Component
             </div>
         </div>
     </div>
-    
+
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
@@ -98,6 +101,9 @@ new class extends Component
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('order.list')" :active="request()->routeIs('order.list')" wire:navigate>
                     {{ __('Meus Pedidos') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('customer.cards')" :active="request()->routeIs('customer.cards')" wire:navigate>
+                    {{ __('Meus cartões') }}
                 </x-responsive-nav-link>
             @else
                 <x-responsive-nav-link :href="route('login')" wire:navigate>
