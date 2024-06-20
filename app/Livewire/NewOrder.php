@@ -29,6 +29,7 @@ class NewOrder extends Component
     public string $ticket_url = '';
     public string $payment_request_id = '';
     public $cardPrice = 10;
+    public $isEnabledSelling = true;
 
     public function mount() {
         if (auth()->check()) {
@@ -38,10 +39,15 @@ class NewOrder extends Component
         }
 
         $this->cardPrice = \App\Models\SiteSetting::getPrice();
+        $this->isEnabledSelling = \App\Models\SiteSetting::isEnabledSelling();
     }
 
     public function nextStep() {
         if ($this->processStatus == 1) {
+            if (!$this->isEnabledSelling) {
+                $this->notity('Aguarde o retorno');
+                return;
+            }
 
             $minimumPurchaseQuantity = \App\Models\SiteSetting::getMinimumPurchaseQuantity();
             // Fetch next n rows from BingoCard after last ordered number
@@ -56,7 +62,8 @@ class NewOrder extends Component
             $endSelling = \App\Models\SiteSetting::getEndSelling();
 
             if ($lastId + $this->quantity > $endSelling) {
-                return redirect("not-enough-stock");
+                $this->notity('Aguarde o retorno');
+                return;
             }
 
             $rules = [

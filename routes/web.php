@@ -45,7 +45,7 @@ Route::get('/', [DashboardController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/check-payment-status', [DashboardController::class, 'checkPaymentStatus']);
 
-Route::get('order/new', NewOrder::class)->name('order.new')->middleware(['card-selling']);
+Route::get('order/new', NewOrder::class)->name('order.new');//->middleware(['card-selling']);
 
 Route::middleware([
     'auth',
