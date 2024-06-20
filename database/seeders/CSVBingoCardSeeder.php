@@ -13,7 +13,7 @@ class CSVBingoCardSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 5; $i < 21; $i++) {
+        for ($i = 6; $i < 21; $i++) {
             $path = storage_path() . "/csv/$i.CSV";
             $delimiter = ";";
             if (($handle = fopen($path, "r")) === false)
@@ -40,8 +40,8 @@ class CSVBingoCardSeeder extends Seeder
                 }
                 $nCnt++;
                 $data = [];
-                for($i = 1; $i < 26; $i++) {
-                    $data["d$i"] = $bingoCard["D$i"];
+                for($k = 1; $k < 26; $k++) {
+                    $data["d$k"] = $bingoCard["D$k"];
                 }
                 $data['card_number'] = str_pad($bingoCard['CartelaD'], 6, '0', STR_PAD_LEFT);
                 $data['card_digit'] = $bingoCard['DigitoD'];
