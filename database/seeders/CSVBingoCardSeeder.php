@@ -13,14 +13,13 @@ class CSVBingoCardSeeder extends Seeder
      */
     public function run(): void
     {
-        $i =3;
-        // for ($i = 1; $i < 21; $i++) {
+        for ($i = 4; $i < 21; $i++) {
             $path = storage_path() . "/csv/$i.CSV";
             $delimiter = ";";
             if (($handle = fopen($path, "r")) === false)
             {
                 print("can't open file $i");
-                return;
+                continue;
             }
 
             $csv_headers = fgetcsv($handle, 4000, $delimiter);
@@ -51,6 +50,6 @@ class CSVBingoCardSeeder extends Seeder
             DB::table('bingo_cards')->insert($bingoCardData);
 
             fclose($handle);
-        // }
+        }
     }
 }
