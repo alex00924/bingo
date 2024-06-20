@@ -45,7 +45,7 @@ class NewOrder extends Component
     public function nextStep() {
         if ($this->processStatus == 1) {
             if (!$this->isEnabledSelling) {
-                $this->notity('Aguarde o retorno');
+                $this->notify('Aguarde o retorno', 'Advertência', 'warning');
                 return;
             }
 
@@ -62,7 +62,7 @@ class NewOrder extends Component
             $endSelling = \App\Models\SiteSetting::getEndSelling();
 
             if ($lastId + $this->quantity > $endSelling) {
-                $this->notity('Aguarde o retorno');
+                $this->notify('Aguarde o retorno', 'Advertência', 'warning');
                 return;
             }
 
