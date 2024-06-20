@@ -40,22 +40,20 @@ Route::get('/artisan/{cmd}', function ($cmd) {
     Artisan::call($cmd);
 });
 
-Route::middleware(['card-selling'])->group(function () {
 
-    Route::get('/', [DashboardController::class, 'index']);
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/check-payment-status', [DashboardController::class, 'checkPaymentStatus']);
+Route::get('/', [DashboardController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/check-payment-status', [DashboardController::class, 'checkPaymentStatus']);
 
-    Route::get('order/new', NewOrder::class)->name('order.new');
+Route::get('order/new', NewOrder::class)->name('order.new')->middleware(['card-selling']);
 
-    Route::middleware([
-        'auth',
-    ])->group(function () {
-        Route::view('profile', 'profile')->name('profile');
-        Route::get('order/list', OrderList::class)->name('order.list');
-        Route::get('card/list', CustomerCardList::class)->name('customer.cards');
-        Route::get('order/details/{id}', OrderDetail::class)->name('order.detail');
-    });
+Route::middleware([
+    'auth',
+])->group(function () {
+    Route::view('profile', 'profile')->name('profile');
+    Route::get('order/list', OrderList::class)->name('order.list');
+    Route::get('card/list', CustomerCardList::class)->name('customer.cards');
+    Route::get('order/details/{id}', OrderDetail::class)->name('order.detail');
 });
 
 Route::middleware([
@@ -74,5 +72,9 @@ Route::get('not-selling-now', function() {
     if (\App\Models\SiteSetting::isEnabledSelling()) {
         return redirect("/");
     }
+    return view('not-selling');
+});
+
+Route::get('not-enough-stock', function() {
     return view('not-selling');
 });

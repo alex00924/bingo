@@ -44,12 +44,29 @@ class NewOrder extends Component
         if ($this->processStatus == 1) {
 
             $minimumPurchaseQuantity = \App\Models\SiteSetting::getMinimumPurchaseQuantity();
+            // Fetch next n rows from BingoCard after last ordered number
+            $lastOrder = OrderDetails::orderBy('id', 'desc')->first();
+            $lastId = 0;
+            if (!empty($lastOrder)) {
+                $lastId = $lastOrder->bingo_card_id;
+            }
+            $startSelling = \App\Models\SiteSetting::getStartSelling();
+            $lastId = max($lastId, $startSelling-1);
+
+            $endSelling = \App\Models\SiteSetting::getEndSelling();
+
+            if ($lastId + $this->quantity > $endSelling) {
+                return redirect("not-enough-stock");
+            }
+
             $rules = [
                 'name' => ['required', 'string', 'max:255'],
                 'phone' => ['required', 'regex:/\([0-9]{2}\) [0-9]{5}-[0-9]{4}/'],
                 'city' => ['required', 'string', 'max:255'],
                 'quantity' => ['required', 'integer', "min:$minimumPurchaseQuantity"]
             ];
+
+
             $customMessage = [
                 'quantity.min' => 'O campo quantidade deve ser pelo menos :min.'
             ];
@@ -226,8 +243,10 @@ class NewOrder extends Component
         $lastOrder = OrderDetails::orderBy('id', 'desc')->first();
         $lastId = 0;
         if (!empty($lastOrder)) {
-            $lastId = $lastOrder->id;
+            $lastId = $lastOrder->bingo_card_id;
         }
+        $startSelling = \App\Models\SiteSetting::getStartSelling();
+        $lastId = max($lastId, $startSelling-1);
 
         $bingoCards = BingoCards::where('id', '>', $lastId)
             ->limit($this->quantity)->get();

@@ -9,18 +9,22 @@ class SiteSettings extends Component
     public $price = 10;
     public $minimumQuantity = 5;
     public $enabledSelling = true;
+    public $startSelling = 1;
+    public $endSelling = 10000000;
 
     protected function rules()
     {
         return [
             'price' => ['required', 'numeric', 'gt:0'],
-            'minimumQuantity' => ['required', 'numeric', 'gt:0']
+            'minimumQuantity' => ['required', 'numeric', 'gt:0'],
         ];
     }
     public function mount() {
         $this->price = \App\Models\SiteSetting::getPrice();
         $this->minimumQuantity = \App\Models\SiteSetting::getMinimumPurchaseQuantity();
         $this->enabledSelling = \App\Models\SiteSetting::isEnabledSelling();
+        $this->startSelling = \App\Models\SiteSetting::getStartSelling();
+        $this->endSelling = \App\Models\SiteSetting::getEndSelling();
     }
 
     public function setPriceValue() {
@@ -33,6 +37,17 @@ class SiteSettings extends Component
         $this->validate();
         \App\Models\SiteSetting::setMinimumPurchaseQuantity($this->minimumQuantity);
         $this->notify("Quantidade mínima de compra salva");
+    }
+
+    public function setStartEndSelling() {
+        $rule = [
+            'startSelling' => ['required', 'numeric', 'gt:0'],
+            'endSelling' => ['required', 'numeric', "min:$this->startSelling"],
+        ];
+        $this->validate($rule);
+        \App\Models\SiteSetting::setStartSelling($this->startSelling);
+        \App\Models\SiteSetting::setEndSelling($this->endSelling);
+        $this->notify("Índice de vendas inicial e final economizado");
     }
 
     public function toggleEnableSelling() {

@@ -36,6 +36,22 @@ class SiteSetting extends Model
         self::_setSetting("maintenance_mode", $maintenanceValue);
     }
 
+    public static function getStartSelling() {
+        return self::_getSetting("start_selling", 1);
+    }
+
+    public static function setStartSelling($value) {
+        self::_setSetting("start_selling", $value);
+    }
+
+    public static function getEndSelling() {
+        return self::_getSetting("end_selling", 10000000);
+    }
+
+    public static function setEndSelling($value) {
+        self::_setSetting("end_selling", $value);
+    }
+
     public static function _getSetting($setting, $default) {
         $settingObject = self::where('setting', $setting)->first();
         if (empty($settingObject)) {
