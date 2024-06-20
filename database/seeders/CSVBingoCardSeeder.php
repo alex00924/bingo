@@ -13,7 +13,7 @@ class CSVBingoCardSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 14; $i < 17; $i++) {
+        for ($i = 17; $i < 21; $i++) {
             $path = storage_path() . "/csv/$i.CSV";
             $delimiter = ";";
             if (($handle = fopen($path, "r")) === false)
