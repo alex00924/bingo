@@ -49,7 +49,7 @@ new class extends Component
                 {{-- My Cards --}}
                 <div class="space-x-8 ms-10 flex">
                     <x-nav-link :href="route('customer.cards')" :active="request()->routeIs('customer.cards')" wire:navigate>
-                        {{ __('Meus cartões') }}
+                        {{ __('Minhas Cartelas') }}
                     </x-nav-link>
                 </div>
 
