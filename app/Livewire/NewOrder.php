@@ -30,6 +30,7 @@ class NewOrder extends Component
     public string $payment_request_id = '';
     public $cardPrice = 10;
     public $isEnabledSelling = true;
+    public $minimumPurchaseQuantity = 1;
 
     public function mount() {
         if (auth()->check()) {
@@ -40,6 +41,8 @@ class NewOrder extends Component
 
         $this->cardPrice = \App\Models\SiteSetting::getPrice();
         $this->isEnabledSelling = \App\Models\SiteSetting::isEnabledSelling();
+        $this->minimumPurchaseQuantity = \App\Models\SiteSetting::getMinimumPurchaseQuantity();
+        $this->quantity = $this->minimumPurchaseQuantity;
     }
 
     public function nextStep() {
@@ -49,7 +52,7 @@ class NewOrder extends Component
                 return;
             }
 
-            $minimumPurchaseQuantity = \App\Models\SiteSetting::getMinimumPurchaseQuantity();
+            $this->minimumPurchaseQuantity = \App\Models\SiteSetting::getMinimumPurchaseQuantity();
             // Fetch next n rows from BingoCard after last ordered number
             $lastOrder = OrderDetails::orderBy('id', 'desc')->first();
             $lastId = 0;
@@ -70,7 +73,7 @@ class NewOrder extends Component
                 'name' => ['required', 'string', 'max:255'],
                 'phone' => ['required', 'regex:/\([0-9]{2}\) [0-9]{5}-[0-9]{4}/'],
                 'city' => ['required', 'string', 'max:255'],
-                'quantity' => ['required', 'integer', "min:$minimumPurchaseQuantity"]
+                'quantity' => ['required', 'integer', "min:$this->minimumPurchaseQuantity"]
             ];
 
 
@@ -229,7 +232,7 @@ class NewOrder extends Component
 
     public function changeQuantity($amount = 1) {
         $this->quantity += $amount;
-        $this->quantity = max(1, $this->quantity);
+        $this->quantity = max($this->minimumPurchaseQuantity, $this->quantity);
     }
 
     private function createOrder() {
