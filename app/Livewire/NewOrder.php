@@ -114,7 +114,11 @@ class NewOrder extends Component
         }
 
         if ($this->processStatus == 2) {
-            $this->createPaymentRequest();
+            $createdPaymentRequest = $this->createPaymentRequest();
+            if (!$createdPaymentRequest) {
+                $this->notify("Algo deu errado! Por favor, tente novamente", "Error", "error");
+                return;
+            }
             $this->createOrder();
         }
         $this->processStatus += 1;
@@ -218,7 +222,10 @@ class NewOrder extends Component
                 ]
             ];
 
-            $payment->save();
+            $createdRequest = $payment->save();
+            if (!$createdRequest) {
+                return false;
+            }
 
             $this->payment_request_id = $payment->id;
             $this->qr_code_base64 = $payment->point_of_interaction->transaction_data->qr_code_base64;
@@ -227,7 +234,10 @@ class NewOrder extends Component
         // Step 7: Handle exceptions
         } catch (\Exception $e) {
             $this->notify($e->getMessage(), "Error", "error");
+            return false;
         }
+
+        return true;
     }
 
     public function changeQuantity($amount = 1) {
