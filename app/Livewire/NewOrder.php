@@ -223,7 +223,7 @@ class NewOrder extends Component
             ];
 
             $createdRequest = $payment->save();
-            if (!$createdRequest) {
+            if (!$createdRequest || empty($payment->id)) {
                 return false;
             }
 
