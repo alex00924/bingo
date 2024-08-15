@@ -9,7 +9,7 @@ use App\Models\Orders as OrdersModel;
 
 class OrdersExportController extends Controller
 {
-    public function export() 
+    public function export()
     {
         $headers = [
                 'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0'
@@ -19,8 +19,12 @@ class OrdersExportController extends Controller
             ,   'Pragma'              => 'public'
         ];
 
-        $orders = OrdersModel::all();
-        
+        if (auth()->user()->hasRole('admin')) {
+            $orders = OrdersModel::all();
+        } else {
+            $orders = OrdersModel::where('seller_id', auth()->user()->id)->get();
+        }
+
         $exportData = [];
         foreach($orders as $order) {
             $orderDetail = [];
@@ -29,6 +33,7 @@ class OrdersExportController extends Controller
             $orderDetail['NOMECILENTE'] = $order->user->name;
             $orderDetail['FONECLIENTE'] = $order->user->phone;
             $orderDetail['CIDADE'] = $order->user->city;
+            $orderDetail['VENDEDOR'] = empty($order->seller) ? "Site" : $order->seller->name;
             $orderDetail['VALOR'] = $order->price;
             $paymentStatus = "Aguardando Pagamento";
             if ($order->payment_status == 1)  {
@@ -44,10 +49,10 @@ class OrdersExportController extends Controller
         # add headers for each column in the CSV download
         array_unshift($exportData, array_keys($exportData[0]));
 
-        $callback = function() use ($exportData) 
+        $callback = function() use ($exportData)
         {
             $FH = fopen('php://output', 'w');
-            foreach ($exportData as $row) { 
+            foreach ($exportData as $row) {
                 fputcsv($FH, $row, ";");
             }
             fclose($FH);
