@@ -232,6 +232,7 @@ class NewOrder extends Component
 
             $createdRequest = $payment->save();
             if (!$createdRequest || empty($payment->id)) {
+                $this->notify($payment->__get("error")->__toString(), "error");
                 return false;
             }
 
